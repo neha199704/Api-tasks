@@ -1,6 +1,6 @@
 console.log("hello");
 
-let btn = document.getElementById("btn");
+// let btn = document.getElementById("btn");
 let ulList = document.getElementById("ul-list");
 let mySidebar = document.getElementById("mySidebar");
 let myCart = document.getElementById("myCart");
@@ -28,21 +28,21 @@ function search() {
 function openCart() {
   document.getElementById("myCart").style.right = "0";
 }
-function closeCart() {
-  document.getElementById("myCart").style.right = "-500px";
-}
 
 function openNav() {
   document.getElementById("mySidebar").style.left = "0";
 }
 
-function closeNav() {
-  document.getElementById("mySidebar").style.left = "-380px";
-}
-
 function displayWishlist() {
   mySidebar.innerHTML = "";
   let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+
+  let btn = document.createElement("button");
+  btn.addEventListener("click", () => {
+    document.getElementById("mySidebar").style.left = "-380px";
+  });
+  btn.innerText = "x";
+  mySidebar.appendChild(btn);
 
   favourites.forEach((item) => {
     let wishListDiv = document.createElement("div");
@@ -85,6 +85,13 @@ function displayCart() {
   let buy = JSON.parse(localStorage.getItem("buy")) || [];
   let totalAmount = 0;
 
+  let btn = document.createElement("button");
+  btn.addEventListener("click", () => {
+    document.getElementById("myCart").style.right = "-450px";
+  });
+  btn.innerText = "x";
+  myCart.appendChild(btn);
+
   buy.forEach((item) => {
     let cartItemDiv = document.createElement("div");
     cartItemDiv.classList.add("cartItemDiv");
@@ -116,10 +123,10 @@ function displayCart() {
     myCart.appendChild(cartItemDiv);
     totalAmount += item.price * item.quantity;
 
-    console.log(totalAmount, "in function");
+    // console.log(totalAmount, "in function");
   });
 
-  console.log(totalAmount, "outside function");
+  //console.log(totalAmount, "outside function");
   let calculate = document.createElement("div");
   calculate.classList.add("calculate");
   let total = document.createElement("p");
@@ -151,7 +158,8 @@ function displayCart() {
 
 function updateQuantity(id, action) {
   let buy = JSON.parse(localStorage.getItem("buy")) || [];
-  let item = buy.find((buyItem) => buyItem.id === parseInt(id));
+  //parseInt and number both are use here it use here so that string convert to number
+  let item = buy.find((buyItem) => buyItem.id === Number(id));
 
   if (item) {
     if (action === "increase") {
@@ -159,7 +167,7 @@ function updateQuantity(id, action) {
     } else if (action === "decrease" && item.quantity > 1) {
       item.quantity--;
     } else if (action === "decrease" && item.quantity === 1) {
-      buy = buy.filter((buyItem) => buyItem.id !== parseInt(id));
+      buy = buy.filter((buyItem) => buyItem.id !== Number(id));
     }
   }
 

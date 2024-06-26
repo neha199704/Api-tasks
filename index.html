@@ -22,25 +22,20 @@
   </head>
 
   <body>
-    <button onclick="darkMode()" class="mode">
-      <i class="fa-solid fa-sun"></i>
-    </button>
-    <h1>Product List</h1>
-
-    <div id="main">
+    <header id="main">
+      <h1>Product List</h1>
+      <input type="search" placeholder="Search for product" id="input-search" />
+      <!-- <button id="btn">Search</button> -->
       <button class="openbtn" onclick="openNav()">☰ Open Wishlist</button>
-      <button class="openbtn" onclick="closeNav()">Hide Wishlist</button>
-    </div>
 
+      <button class="openbtn" onclick="openCart()">☰ Open Cart</button>
+      <button onclick="darkMode()" class="mode">
+        <i class="fa-solid fa-sun"></i>
+      </button>
+    </header>
     <div id="myCart" class="myCart"></div>
-
-    <button class="openbtn" onclick="openCart()">☰ Open Cart</button>
-    <button class="openbtn" onclick="closeCart()">Close Cart</button>
-
     <div id="mySidebar" class="sidebar"></div>
 
-    <input type="search" placeholder="Search for product" id="input-search" />
-    <button id="btn">Search</button>
     <ul id="ul-list"></ul>
 
     <script src="./api.js"></script>
